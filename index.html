@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weaver Boilerplate (alpha)</title>
+        <!-- data-main attribute tells require.js to load
+             scripts/main.js after require.js loads. -->
+        <script type="text/javascript" src="weaver-sdk.full.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/bluebird/latest/bluebird.core.js"></script>
+        <script type="text/javascript" src="index.js"></script>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <div class="current-project-container">
+            <p>Current project:</p>
+            <b>name:</b><span id="current-project-name">none</span>
+            <b>id:</b><span id="current-project-id">none</span>
+        </div>
+
+        <h1>Weaver Boilerplate (alpha)</h1>
+
+          <div id="step-1">
+
+            <h3><span>Step 1:</span> Connect to a WeaverServer instance</h3>
+            <label>
+                <div>
+                    url:
+                    <input id="database-url" value="http://192.168.1.13:4567/api/v1"/>
+                </div>
+            </label>
+            <div>
+                <button onclick="connect()">Connect</button>
+            </div>
+
+          </div>
+          <div id="step-2" class="disabled">
+
+            <h3><span>Step 2:</span> Create a project (or a bunch of them)</h3>
+            <label>
+                <div>
+                    project name:
+                    <input id="create-project-name" placeholder="My first project"/>
+
+                </div>
+            </label>
+            <div>
+                <button class="create" onclick="createProject()">Create</button>
+            </div>
+          </div>
+
+          <div id="step-3" class="disabled">
+              <span style="padding-top:40px; display:block;"><b>and/or</b></span>
+            <h3><span>Step 3:</span> Select a project to work on</h3>
+            <label>
+                <div>
+                    <div id="project-list"></div>
+                </div>
+            </label>
+            <div>
+                <button onclick="updateProjectList()" class="edit">Update project list</button>
+                <button onclick="useProject()">Choose</button>
+            </div>
+
+          </div>
+          <div id="step-4" class="disabled">
+
+            <h3><span>Step 4:</span> Create some nodes</h3>
+              <label>
+                <div>
+                    node name:
+                    <input id="create-node-name" placeholder="Mr Node"/><br>
+
+                    node id:
+                    <input id="create-node-id" placeholder="this will be a random uuid if left blank.."/><br>
+                </div>
+              </label>
+              <label>
+                  <div>
+                      <div id="created-node-list">
+                          Nodes:
+                      </div>
+                  </div>
+              </label>
+            <div>
+                <button class="create" onclick="createNewNode()">Create</button>
+            </div>
+
+          </div>
+
+          <div id="step-5" class="disabled">
+
+              <h3><span>Step 5:</span> List all nodes</h3>
+              <label>
+                  <div>
+                      <div id="full-node-list"></div>
+                  </div>
+              </label>
+              <div>
+                  <button onclick="updateNodeList()">Update node list</button>
+              </div>
+
+          </div>
+
+          <div id="step-6" class="disabled">
+
+            <h3><span>Step 6:</span> Give a node some attributes</h3>
+            <label>
+
+                <div>
+                    Node id:
+                    <input id="add-attr-id" placeholder="mrBoschRoot" type="text"/><br>
+                    Attribute name:
+                    <input id="add-attr-key" placeholder="hasName" type="text"/><br>
+                    Attribute value:
+                    <input id="add-attr-val" placeholder="Hieronymus Bosch" type="text"/><br>
+                </div>
+            </label>
+            <div>
+                <button class="edit" onclick="addAttribute()">Attribute</button>
+            </div>
+
+          </div>
+          <div id="step-7" class="disabled">
+
+            <h3><span>Step 7:</span> Link some nodes together</h3>
+            <label>
+                <div>
+                    First node id:
+                    <input id="add-rel-id1" placeholder="mrBoschRoot" type="text"/><br>
+                    Relation name:
+                    <input id="add-rel-key" placeholder="hasSpouse" type="text"/><br>
+                    Second node id:
+                    <input id="add-rel-id2" placeholder="msBoschRoot" type="text"/><br>
+                </div>
+            </label>
+            <div>
+                <button class="edit" onclick="addRelation()">Link</button>
+            </div>
+          </div>
+
+
+        <div id="step-8" class="disabled">
+            <h3><span>Step 8 - &infin;</span> Check out what you did</h3>
+            <span>Query the current project database here.
+            This instance is running Virtuoso, so you should use <a href="https://www.w3.org/TR/rdf-sparql-query/">Sparql</a> syntax.</span>
+            <textarea id="query-div">
+
+                SELECT * WHERE
+
+                            { ?s ?p ?o }
+            </textarea>
+            <div class="run-query-toolbar">
+                <button style="margin-top:15px" id="run-query-btn" onclick="runQuery()">Run query</button>
+            </div>
+        </div>
+
+        <div id="step-9" class="disabled">
+            <h3><span>Step 9</span> Made a mess?</h3>
+            <button class="remove" onclick="wipe()">Wipe database</button>
+        </div>
+
+        <p class="bottom">Happy weaving!</p>
+    </body>
+</html>
